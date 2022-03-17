@@ -36,26 +36,22 @@ var searchCity = function (data) {
   $(".city-name").text(data.name);
   $(".temp").text(data.main.temp + "°F");
   $(".wind").text(data.wind.speed + "MPH");
-  $(".humidity").text(data.name);
+
   var lon = data.coord.lon;
   var lat = data.coord.lat;
-  console.log(lat, lon);
   apiUv(lat, lon);
-
-  //   apiUv(data.lat, data.lon);
 };
 var apiUv = function (lat, lon) {
-  var latapi =
+  console.log(lat, lon);
+  var latApi =
     "https://api.openweathermap.org/data/2.5/onecall?lat=" +
     lat +
     "&lon=" +
     lon +
-    "&exclude={part}&appid=&appid=37e6dcaaa7be78a19d983eb490d52ae4";
-  fetch(apiUv).then(function (response) {
-    console.log(response);
-    response.json().then(function (data) {
-      //   console.log(data);
-      searchCity(data);
-    });
+    "&exclude=hourly,daily&appid=37e6dcaaa7be78a19d983eb490d52ae4";
+  console.log(latApi);
+  fetch(latApi).then(function (data) {
+    console.log(data);
   });
+  //   $(".index").text(data.name);
 };
