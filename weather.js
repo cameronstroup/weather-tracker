@@ -1,10 +1,8 @@
-currentTime = $("#current-time").text(moment().format("L"));
-currentCity = $(".user-input1").val();
-
-submitBtn = $(".search-city");
-cityList = $(".input-group-append");
-
 $(document).ready(function () {
+  currentTime = $("#current-time").text(moment().format("L"));
+  submitBtn = $(".search-city");
+  cityList = $(".input-group-append");
+
   $(".search-city").on("click", searchCity);
 });
 
@@ -12,7 +10,7 @@ var getCity = function (user) {
   // format the github api url
   var apiUrl =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
-    "austin" +
+    currentCity +
     "&appid=37e6dcaaa7be78a19d983eb490d52ae4";
 
   // make a get request to url
@@ -24,12 +22,11 @@ var getCity = function (user) {
   });
 };
 
-getCity();
-
 var searchCity = function (event) {
   event.preventDefault();
   searchCity = console.log(event);
-
+  currentCity = $(".user-input1").val();
+  getCity();
   if (currentCity) {
     getUserRepos(username);
     nameInputEl.value = "";
