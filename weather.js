@@ -2,9 +2,10 @@
 
 submitBtn = $(".search-city");
 cityList = $(".input-group-append");
+currentTime = moment().format("L");
 
 $(document).ready(function () {
-  currentTime = $("#current-time").text(moment().format("L"));
+  $("#current-time").text(moment().format("L"));
 
   $(".search-city").on("click", getCity);
 });
@@ -34,8 +35,8 @@ var searchCity = function (data) {
   console.log(data);
 
   $(".city-name").text(data.name);
-  $(".temp").text(data.main.temp + "°F");
-  $(".wind").text(data.wind.speed + "MPH");
+  $(".temp").text("Tempeture: " + data.main.temp + "°F");
+  $(".wind").text("Wind Speed: " + data.wind.speed + "MPH");
 
   var lon = data.coord.lon;
   var lat = data.coord.lat;
@@ -48,10 +49,30 @@ var apiUv = function (lat, lon) {
     lat +
     "&lon=" +
     lon +
-    "&exclude=hourly,daily&appid=37e6dcaaa7be78a19d983eb490d52ae4";
+    "&units=imperial" +
+    "&appid=37e6dcaaa7be78a19d983eb490d52ae4";
   console.log(latApi);
-  fetch(latApi).then(function (data) {
-    console.log(data);
+  fetch(latApi).then(function (response) {
+    response.json().then(function (data) {
+      console.log(data);
+      $(".index").text("UVI Index: " + data.current.uvi);
+      console.log(data.daily[1]);
+
+      //color index for UV
+      if (data.daily[0].uvi < 2) {
+        $(".index").text(data.daily[0].uvi).removeClass().addClass("safe");
+      } else if (data.daily[0].uvi > 3 && data.daily[0].uvi < 6) {
+        $(".index").text(data.daily[0].uvi).removeClass().addClass("medium");
+      } else {
+        $(".index").text(data.daily[0].uvi).removeClass().addClass("danger");
+      }
+
+      for (i = 1; i < 6; i++) {
+        $("#currentDay" + [i]).text(currentTime + [i]);
+        $("#temp" + [i]).text(data.daily[i].temp.day + "°F");
+        $("#wind" + [i]).text(data.daily[i].wind_speed + "MPH");
+        $("#humidity" + [i]).text(data.daily[i].humidity + "%");
+      }
+    });
   });
-  //   $(".index").text(data.name);
 };
