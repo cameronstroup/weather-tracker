@@ -14,3 +14,25 @@ h1 {
 .city-name {
   font-size: 30px;
 }
+
+.danger {
+  background-color: red;
+}
+
+.save {
+  background-color: rgb(0, 255, 34);
+}
+
+.medium {
+  background-color: rgb(251, 255, 0);
+}
+
+img {
+  max-width: 10%;
+  height: auto;
+}
+
+.icons {
+  max-width: 50%;
+  height: auto;
+}

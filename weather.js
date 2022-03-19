@@ -14,6 +14,7 @@ $(document).ready(function () {
 var getCity = function (user) {
   // format the github api url
   currentCity = $(".user-input1").val().trim();
+
   var apiUrl =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
     currentCity +
@@ -37,7 +38,10 @@ var searchCity = function (data) {
   $(".city-name").text(data.name);
   $(".temp").text("Tempeture: " + data.main.temp + "°F");
   $(".wind").text("Wind Speed: " + data.wind.speed + "MPH");
-
+  $(".icon0").attr(
+    "src",
+    "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png"
+  );
   var lon = data.coord.lon;
   var lat = data.coord.lat;
   apiUv(lat, lon);
@@ -55,20 +59,36 @@ var apiUv = function (lat, lon) {
   fetch(latApi).then(function (response) {
     response.json().then(function (data) {
       console.log(data);
-      $(".index").text("UVI Index: " + data.current.uvi);
-      console.log(data.daily[1]);
+      $(".index").text("UVI Index:" + data.current.uvi);
+      console.log(data);
 
-      //color index for UV
-      if (data.daily[0].uvi < 2) {
-        $(".index").text(data.daily[0].uvi).removeClass().addClass("safe");
-      } else if (data.daily[0].uvi > 3 && data.daily[0].uvi < 6) {
-        $(".index").text(data.daily[0].uvi).removeClass().addClass("medium");
+      if (data.current.uvi < 2) {
+        $(".index")
+          .text("       " + data.current.uvi)
+          .removeClass()
+          .addClass("safe");
+      } else if ("    " + data.current.uvi > 3 && data.current.uvi < 6) {
+        $(".index")
+          .text("    " + data.current.uvi)
+          .removeClass()
+          .addClass("medium");
       } else {
-        $(".index").text(data.daily[0].uvi).removeClass().addClass("danger");
+        $(".index")
+          .text("    " + data.current.uvi)
+          .removeClass()
+          .addClass("danger");
       }
 
       for (i = 1; i < 6; i++) {
-        $("#currentDay" + [i]).text(currentTime + [i]);
+        // $("#currentDay" + [i])
+        //   .text(data.daily[i].dit * 1000)
+        //   .toLocaleDateString("en-Us");
+        $("#icon" + [i]).attr(
+          "src",
+          "http://openweathermap.org/img/wn/" +
+            data.daily[i].weather[0].icon +
+            ".png"
+        );
         $("#temp" + [i]).text(data.daily[i].temp.day + "°F");
         $("#wind" + [i]).text(data.daily[i].wind_speed + "MPH");
         $("#humidity" + [i]).text(data.daily[i].humidity + "%");
