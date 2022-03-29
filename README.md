@@ -24,4 +24,4 @@ https://mlportu.github.io/weather-dashboard/
 ![web page screenshot](assets/images/Weather-Dashboard.png)
 
 ## Contribution
-Made by Mike Portu
+Made by Cameron Stroup
