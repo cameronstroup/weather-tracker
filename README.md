@@ -1,14 +1,13 @@
 # Weather Dashboard
 
 ## Purpose
-A web-based dashboard built to show the current weather in a city of choice and the upcoming five (5) day forecast for that city
-Built for Vanderbilt Coding Bootcamp Challenge 6
+This is a web based app that I buitl to show the user the weather of his/her desired city. 
 
 Enter in your city of choice and select search to view the current weather, temperature, humidity, wind speed, and UV Index for that city at the current time. Upon the search, the dashobard will also display the weather, temperature and hummidity forecast for the next five(5) days. 
 
-UV Index will be accompanied by a color indicating the severity of the index. Favorable is shown in gree, Moderate is shown in yellow and severe is shown in red. 
+The uv index will be either green, yellow, or red depending of the intensitiy of the current index
 
-Previous searches are saved in localStorage and the five (5) most recent searches are available as buttons in order for easy access and re-searching of weather and forecasts
+Previous searches are saved in localStorage, however still have bugs that I am working on but wanted to turn something in 
 
 ## Built With
 * HTML
@@ -19,9 +18,9 @@ Previous searches are saved in localStorage and the five (5) most recent searche
 * Moment.js API
 
 ## Website
-https://mlportu.github.io/weather-dashboard/
+https://cameronstroup.github.io/weather-tracker/
 
-![web page screenshot](assets/images/Weather-Dashboard.png)
+![image](https://user-images.githubusercontent.com/90347622/160708260-f38a5f86-f33b-49e9-a201-23c0e5739098.png)
 
 ## Contribution
 Made by Cameron Stroup
